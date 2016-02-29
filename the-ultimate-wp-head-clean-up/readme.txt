@@ -50,15 +50,11 @@ The Plugin will remove following links:
 
 = Docs & Support =
 
-You can find [docs](http://www.wpshore.com/plugins/wp-headcleanup/)
+
 
 = Recommended Plugins =
 
 The following are other recommended plugins by the author of WP Head Cleanup:
-
-* [Contact Form 7 Leads Tracking](http://www.wpshore.com/plugins/contact-form-7-leads-tracking/) - With Contact Form 7 Leads Tracking,you can track the user who has filled the form.
-* [WPshore Breadcrumb](http://www.wpshore.com/plugins/wpshore-breadcrumb/) - With WPshore Breadcrumb, user can see where the current page is in relation to the website's hierarchy.
-
 
 
 == Installation ==
