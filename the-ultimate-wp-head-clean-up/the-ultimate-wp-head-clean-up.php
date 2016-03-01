@@ -2,8 +2,8 @@
 /*
 === the ULTIMATE WP Head Cleanup ===
 Plugin Name: The ULTIMATE WP Head Cleanup
-Plugin URI: http://www.chicagocomputerclasses.com/
-Donate link: http://www.chicagocomputerclasses.com/
+Plugin URI: http://www.chicagocomputerclasses.com/plugins/
+Donate link: http://www.chicagocomputerclasses.com/plugins/
 Tags: wordpress head cleanup, wp_head cleanup, cleaner, remove head junk
 Version: 1.0
 Author: Chi Bramder Inc.
@@ -17,23 +17,27 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 // create custom plugin settings menu
-add_action('admin_menu', 'wphead_cleanup_create_menu');
-add_action( 'init', 'wphead_init' );		
+add_action('admin_menu', 'ultimate_wphead_cleanup_create_menu');
+add_action( 'init', 'tuwphc_wphead_init' );		
 
-function wphead_cleanup_create_menu() {
+function ultimate_wphead_cleanup_create_menu() {
 
 	//create new top-level menu
-	add_options_page('WP Head Cleanup Settings', 'WP head Cleanup', 'administrator', __FILE__, 'wphead_Cleanup_settings_page');
+    add_options_page('The ULTIMATE WP Head Cleanup', 'The ULTIMATE WP Head Cleanup', 'administrator', __FILE__, 'ultimate_wphead_cleanup_settings_page');
 
 	//call register settings function
-	add_action( 'admin_init', 'register_wphead_settings' );
+	add_action( 'admin_init', 'uwphc_register_wphead_settings' );
 }
 
+function tuwphc_custom_wp_admin_style() {
+        wp_register_style( 'tuwphc_custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'css/admin-styles.css', false, '1.0.0' );
+        wp_enqueue_style( 'tuwphc_custom_wp_admin_css' );
+}
+add_action( 'admin_enqueue_scripts', 'tuwphc_custom_wp_admin_style' );
 
 
 
-
-	function wphead_init() {
+	function tuwphc_wphead_init() {
 		
 		/* This will remove Really Simple Discovery link from the header */
 		if(get_option( 'remove_rsd_link' ) == true ){
@@ -111,6 +115,17 @@ function wphead_cleanup_create_menu() {
         }        
         
         
+        if(get_option( 'remove_version' ) == true ){
+            // Remove WP version parameter from any enqueued scripts
+            function remove_wp_ver_css_js( $src ) {
+                if ( strpos( $src, 'ver=' ) )
+                    $src = remove_query_arg( 'ver', $src );
+                return $src;
+            }
+            add_filter( 'style_loader_src', 'remove_wp_ver_css_js');
+            add_filter( 'script_loader_src', 'remove_wp_ver_css_js');
+        }   
+        
         //add_filter('show_admin_bar', '__return_false');
         
         //potentail future implementations
@@ -134,7 +149,7 @@ function wphead_cleanup_create_menu() {
         
         
 }		
-function register_wphead_settings() {
+function uwphc_register_wphead_settings() {
 	//register our settings
 	register_setting( 'wphead_cleanup-settings-group', 'remove_rsd_link' );
 	register_setting( 'wphead_cleanup-settings-group', 'remove_wp_generator' );
@@ -153,21 +168,24 @@ function register_wphead_settings() {
     register_setting( 'wphead_cleanup-settings-group', 'remove_emoji' );
     register_setting( 'wphead_cleanup-settings-group', 'remove_rest_output_link_wp_head' );
     register_setting( 'wphead_cleanup-settings-group', 'remove_oembed' );
+    register_setting( 'wphead_cleanup-settings-group', 'remove_version' );
     
     
 }
 
 
-function wphead_Cleanup_settings_page() {
+function ultimate_wphead_cleanup_settings_page() {
 ?>
     <div class="wrap">
-        <h2>WP Head Cleanup</h2>
-        <h3>Select the elements you want to remove from the head section:</h3>
+    <div class="tuwphc">
+        <h2><span class="dashicons dashicons-admin-generic"></span> The ULTIMATE WP Head Cleanup <span class="dashicons dashicons-admin-generic"></span></h2>
+        <h3>Check the elements you want to remove:</h3>
+		<p>Please, note that disabling some components may cause some components stop working.</p>
 
         <form method="post" action="options.php">
             <?php settings_fields( 'wphead_cleanup-settings-group' ); ?>
-
-                <table class="form-table">
+				
+                <table class="col-3">
                     <tr valign="top">
 
                         <th scope="row">Really Simple Discovery</th>
@@ -205,6 +223,16 @@ function wphead_Cleanup_settings_page() {
                         <td>
                             <input type="checkbox" name="remove_wlwmanifest_link" value="1" <?php if (get_option( 'remove_wlwmanifest_link')==true) echo 'checked="checked" '; ?>" /></td>
                     </tr>
+					
+					
+					
+					</table>
+					
+					
+					
+					<table class="col-3">
+					
+					
 
                     <tr valign="top">
                         <th scope="row">Remove parent post link</th>
@@ -231,16 +259,23 @@ function wphead_Cleanup_settings_page() {
                     </tr>
 
 
-
-
-
-
                     <tr valign="top">
                         <th scope="row">Remove canonical reference</th>
                         <td>
                             <input type="checkbox" name="remove_rel_canonical" value="1" <?php if (get_option( 'remove_rel_canonical')==true) echo 'checked="checked" '; ?>" /></td>
                     </tr>
 
+					
+					</table>
+					
+					
+					
+					<table class="col-3">					
+					
+					
+					
+					
+					
                     <tr valign="top">
                         <th scope="row">Remove emoji references</th>
                         <td>
@@ -257,11 +292,19 @@ function wphead_Cleanup_settings_page() {
                             <input type="checkbox" name="remove_oembed" value="1" <?php if (get_option( 'remove_oembed')==true) echo 'checked="checked" '; ?>" /></td>
                     </tr>
 
+                    <tr valign="top">
+                        <th scope="row">Remove CSS, JavaScript versions</th>
+                        <td>
+                            <input type="checkbox" name="remove_version" value="1" <?php if (get_option( 'remove_version')==true) echo 'checked="checked" '; ?>" /></td>
+                    </tr>
+
 
                 </table>
 
-                <?php submit_button(); ?>
-
+				<div class="tuwphc-clear">
+					<?php submit_button(); ?>
+				</div>
         </form>
+    </div>
     </div>
     <?php } ?>
