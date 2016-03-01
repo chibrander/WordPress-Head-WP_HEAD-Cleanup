@@ -48,6 +48,7 @@ Option 2:
 
 == Screenshots ==
 
+![alt text](https://github.com/chibrander/WordPress-Head-WP_HEAD-Cleanup/blob/master/screenshot.png "The ULTIMATE WP Head Cleanup Settings")
 
 == Changelog ==
 
