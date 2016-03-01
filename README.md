@@ -3,16 +3,27 @@ The ULTIMATE WP Head Cleanup plugin is all you need to remove all the unnecessar
 
 
 === The ULTIMATE WP Head Cleanup ===
+
 Plugin Name: The ULTIMATE WP Head Cleanup
+
 Plugin URI: http://www.chicagocomputerclasses.com
+
 Tags: wordpress head cleanup, wp_head cleanup, cleaner, remove head junk
-Requires at least: 3.0
-Tested up to: 4.0
+
+Requires at least: 4.0
+
+Tested up to: 4.4
+
 Stable tag: 1.0
+
 License: GPLv2 or later
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+
 The ULTIMATE WP Head Cleanup plugin is all you need to remove all the unnecessary lines in the head section of your WordPress website. 
+
+
 
 == Description ==
 
