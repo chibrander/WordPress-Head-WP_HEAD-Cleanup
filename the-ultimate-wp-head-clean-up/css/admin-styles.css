@@ -1,0 +1,75 @@
+/*
+Admin Stylesheet
+=== the ULTIMATE WP Head Cleanup ===
+Plugin Name: The ULTIMATE WP Head Cleanup
+Plugin URI: http://www.chicagocomputerclasses.com/
+Donate link: http://www.chicagocomputerclasses.com/
+Tags: wordpress head cleanup, wp_head cleanup, cleaner, remove head junk
+Version: 1.0
+Author: Chi Bramder Inc.
+Description: The ULTIMATE WP Head Cleanup plugin is all you need to remove all the unnecessary lines in the head section of your WordPress website.
+Author URI: http://www.chicagocomputerclasses.com/
+Requires at least: 3.0
+Tested up to: 4.0
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+.tuwphc {
+	background-color: white;
+}
+
+.settings_page_the-ultimate-wp-head-clean-up-the-ultimate-wp-head-clean-up  #wpcontent {
+	background-color: white;
+}
+
+.tuwphc-clear {
+	clear:both;
+}
+
+
+
+.tuwphc  .button.button-primary {
+    width: 100%;
+    margin-top: 25px;
+}
+
+
+.tuwphc table tr td, .tuwphc table tr th {
+    padding: 7px 0 10px 0;
+    border-bottom: 1px dashed #E6E6E6;
+}
+
+
+.tuwphc table {
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.tuwphc h2 {
+    font-size: 2.3em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #DEDEDE;
+    padding-bottom: 14px;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+@media screen and (min-width: 783px) {
+table.col-3 {
+    width: 33.333333%;
+    float: left;
+}
+}
+
+@media screen and (max-width: 782px) {
+table.col-3 {
+    width: 100%;
+}
+.tuwphc h2 {
+    font-size:1.3em;
+}
+}
